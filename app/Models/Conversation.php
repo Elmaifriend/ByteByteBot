@@ -9,7 +9,7 @@ class Conversation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['phone', 'name', 'status', 'data'];
+    protected $fillable = ['phone', 'name', 'status', 'data', 'created_at', 'updated_at'];
 
     protected $casts = [
         'data' => 'array',

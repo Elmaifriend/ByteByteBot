@@ -16,6 +16,10 @@ class IntentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-light-bulb';
 
+    protected static ?string $navigationGroup = 'Ajustes';
+
+    protected static ?string $navigationLabel = 'Intenciones';
+
     public static function form(Form $form): Form
     {
         return $form->schema([

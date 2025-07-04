@@ -16,6 +16,11 @@ class BotConfigResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
 
+    protected static ?string $navigationGroup = 'Ajustes';
+
+    protected static ?string $navigationLabel = 'Ajustes del bot';
+
+
     public static function form(Form $form): Form
     {
         return $form

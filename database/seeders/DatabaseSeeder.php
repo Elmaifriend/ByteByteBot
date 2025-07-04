@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             MessageSeeder::class,
             BotConfigSeeder::class,
             IntentSeeder::class,
+            AppointmentSeeder::class,
+            DocumentSeeder::class,
         ]);
     }
 }

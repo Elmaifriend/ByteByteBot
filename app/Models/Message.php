@@ -9,7 +9,7 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['conversation_id', 'role', 'content'];
+    protected $fillable = ['conversation_id', 'role', 'content', 'created_at', 'updated_at'];
 
     public function conversation()
     {

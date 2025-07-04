@@ -22,6 +22,8 @@ class ConversationFactory extends Factory
                 'last_seen' => now()->toDateTimeString(),
                 'notes' => $this->faker->sentence,
             ],
+            'created_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

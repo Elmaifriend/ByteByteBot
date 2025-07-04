@@ -15,10 +15,10 @@ class ConversationsChart extends ChartWidget
     {
         $data = Trend::model(Conversation::class)
             ->between(
-                start: now()->startOfYear(),
-                end: now()->endOfYear(),
+                start: now()->subDays(30)->startOfDay(),
+                end: now()->endOfDay(),
             )
-            ->perMonth()
+            ->perDay()
             ->count();
 
         return [

@@ -15,8 +15,8 @@ class MessagesChart extends ChartWidget
     {
         $data = Trend::model(Message::class)
             ->between(
-                start: now()->subDays(30),  // Últimos 30 días
-                end: now(),
+                start: now()->subDays(30)->startOfDay(),
+                end: now()->endOfDay(),
             )
             ->perDay()
             ->count();
@@ -34,6 +34,6 @@ class MessagesChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'line'; // O 'bar' si prefieres barras
+        return 'line'; // o 'bar'
     }
 }

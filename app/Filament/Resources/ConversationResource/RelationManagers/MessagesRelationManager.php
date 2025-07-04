@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MessagesRelationManager extends RelationManager
 {
@@ -27,12 +25,22 @@ class MessagesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('content')
+            ->defaultSort('created_at', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('content'),
-            ])
-            ->filters([
-                //
+                Tables\Columns\TextColumn::make('content')
+                    ->limit(50)
+                    ->tooltip(fn ($record) => $record->content),
+
+                Tables\Columns\BadgeColumn::make('role')
+                    ->colors([
+                        'primary' => 'user',
+                        'success' => 'assistant',
+                    ]),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Hace')
+                    ->since()  // <-- Esto muestra el tiempo desde la fecha, tipo "hace 5 minutos"
+                    ->sortable(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

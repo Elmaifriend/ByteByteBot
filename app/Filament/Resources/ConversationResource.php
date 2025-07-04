@@ -20,6 +20,11 @@ class ConversationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Conversaciones';
+
+    protected static ?string $navigationLabel = 'Conversaciones';
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -64,6 +69,7 @@ class ConversationResource extends Resource
     {
         return [
             RelationManagers\MessagesRelationManager::class,
+            //RelationManagers\DocumentsRelationManager::class
         ];
     }
 
@@ -74,5 +80,10 @@ class ConversationResource extends Resource
             'create' => Pages\CreateConversation::route('/create'),
             'edit' => Pages\EditConversation::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

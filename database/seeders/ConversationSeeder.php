@@ -2,19 +2,22 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Conversation;
+use App\Models\Message;
 
 class ConversationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Conversation::factory()
-            ->count(100)
-            ->create();
+        // Crear 100 conversaciones
+        Conversation::factory()->count(100)->create()->each(function ($conversation) {
+            // Crear entre 1 y 5 mensajes por conversación
+            Message::factory()
+                ->count(rand(1, 5))
+                ->create([
+                    'conversation_id' => $conversation->id,
+                ]);
+        });
     }
 }

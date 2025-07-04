@@ -19,6 +19,11 @@ class MessageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Conversaciones';
+
+    protected static ?string $navigationLabel = 'Mensajes';
+
+
     public static function form(Form $form): Form
     {
         return $form
