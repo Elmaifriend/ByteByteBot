@@ -14,7 +14,7 @@ class MessageSeeder extends Seeder
 
         foreach ($conversations as $conversation) {
             // Generar entre 4 y 8 mensajes por conversación
-            $count = rand(4, 8);
+            $count = rand(10, 50);
 
             // Vamos a ir alternando los roles: user -> assistant -> user -> assistant ...
             $roles = ['user', 'assistant'];

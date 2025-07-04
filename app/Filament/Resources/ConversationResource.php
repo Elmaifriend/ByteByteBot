@@ -46,6 +46,7 @@ class ConversationResource extends Resource
                 Tables\Columns\TextColumn::make('messages_count')->counts('messages')->label('Mensajes')->badge(),
                 Tables\Columns\TextColumn::make('updated_at')->label('Última actividad')->since(),
             ])
+            ->defaultSort('updated_at', 'desc')
             ->filters([
                 //
             ])
