@@ -16,17 +16,24 @@ class ChatbotController extends Controller
     {
         $validated = $request->validate([
             'phone' => 'required|string',
+            'name' => 'nullable|string',
             'message' => 'required|string',
             'role' => 'required|in:user,assistant',
         ]);
 
-        // Crear conversación si no existe
+        // Buscar o crear la conversación por teléfono
         $conversation = Conversation::firstOrCreate(
             ['phone' => $validated['phone']],
             ['status' => 'esperando', 'data' => []]
         );
 
-        // Guardar mensaje
+        // Si llega el nombre y es diferente al actual, actualizarlo
+        if (!empty($validated['name']) && $validated['name'] !== $conversation->name) {
+            $conversation->name = $validated['name'];
+            $conversation->save();
+        }
+
+        // Crear el mensaje asociado
         $message = $conversation->messages()->create([
             'role' => $validated['role'],
             'content' => $validated['message'],

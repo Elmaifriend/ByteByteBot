@@ -16,6 +16,7 @@ class ConversationFactory extends Factory
     {
         return [
             'phone' => $this->faker->e164PhoneNumber,
+            'name' => $this->faker->name,
             'status' => $this->faker->randomElement(['open', 'closed', 'pending']),
             'data' => [
                 'last_seen' => now()->toDateTimeString(),

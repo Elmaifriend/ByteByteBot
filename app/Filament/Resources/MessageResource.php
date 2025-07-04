@@ -41,11 +41,28 @@ class MessageResource extends Resource
                 Tables\Columns\TextColumn::make('conversation_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('role'),
+
+                // ✅ Rol con visual extra (badge o color opcional)
+                Tables\Columns\BadgeColumn::make('role')
+                    ->colors([
+                        'info' => 'user',
+                        'success' => 'assistant',
+                        'danger' => 'system',
+                    ])
+                    ->sortable(),
+
+                // ✅ Preview del mensaje truncado
+                Tables\Columns\TextColumn::make('content')
+                    ->label('Preview')
+                    ->limit(50) // Trunca el texto a 50 caracteres
+                    ->tooltip(fn ($record) => $record->content), // Tooltip con texto completo
+                    // Puedes añadir ->wrap() si quieres permitir saltos de línea
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()

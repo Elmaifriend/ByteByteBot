@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,7 +24,16 @@ class ConversationResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('phone')
+                    ->label('Teléfono')
+                    ->required()
+                    ->tel()
+                    ->maxLength(20),
+
+                TextInput::make('name')
+                    ->label('Nombre')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -33,7 +43,7 @@ class ConversationResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('phone')->label('Teléfono'),
                 Tables\Columns\TextColumn::make('name')->label('Nombre'),
-                Tables\Columns\TextColumn::make('messages_count')->counts('messages')->label('Mensajes'),
+                Tables\Columns\TextColumn::make('messages_count')->counts('messages')->label('Mensajes')->badge(),
                 Tables\Columns\TextColumn::make('updated_at')->label('Última actividad')->since(),
             ])
             ->filters([

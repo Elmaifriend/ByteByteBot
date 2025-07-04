@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::create('intents', function (Blueprint $table) {
             $table->id();
-            $table->string('phone')->unique();
-            $table->string('name')->nullable();
-            $table->string('status')->default('primer_contacto'); // estado actual
-            $table->json('data')->nullable(); // info recolectada (nombre, email, etc)
+            $table->string('intent');      // Ej: Agendar cita
+            $table->string('key')->unique(); // Ej: agendar_cita:iniciar
+            $table->text('description');   // Ej: Esta intención se usa para...
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('intents');
     }
 };
